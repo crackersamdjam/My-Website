@@ -1,2 +1,0 @@
-# crackersamdjam.github.io
-Website
