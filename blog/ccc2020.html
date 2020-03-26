@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>Eric Pei | Blog</title>
+        <link rel="icon" href="../images/icon2.ico" type="image/icon">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="../assets/css/main.css" />
+
+        <!-- MathJax so that I can use inline LaTeX -->
+        <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+          }
+        };
+        </script>
+        <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        </script>
+    </head>
+    
+    <body class="is-preload">
+
+        <div id="page-wrapper">
+
+            <!-- Header -->
+            <div id="header">
+
+                <!-- Nav -->
+                <nav id="nav">
+                    <ul>
+                        <h1><a href="../index.html">Eric Pei</a></h1>
+
+                       <img src="../images/icon2.ico" alt="icon">
+
+                        <li><a href="../index.html">Home</a></li>
+                        <li>
+                            <a href="#">About Me</a>
+                            <ul>
+                                <li><a href="../general.html">General</a></li>
+                                <li><a href="../programming.html">Programming</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="../lessons.html">Programming Lessons</a></li>
+                        <li class="current"><a href="../blog.html">Blog</a></li>
+
+                    </ul>
+                </nav>
+            </div>
+            <!-- copy up until here for every page -->
+
+            <!-- Main -->
+                <section class="wrapper style1">
+                    <div class="container">
+                        <div class="row gtr-200">
+
+                            <div class="col-8 col-12-narrower">
+                                <div id="content">
+                                    <article>
+                                        <header>
+                                            <h2>CCC 2020</h2>
+                                            <p><a href="https://cemc.uwaterloo.ca/contests/past_contests.html#ccc">Canadian Computing Competition, Senior Division</a></p>
+                                        </header>
+<p>This year's Canadian Computing Competition was held on February 12, 2020. Here I will dissect the results of the Senior Division.</p>
+<h3>Contest Analysis</h3>
+<span>
+    <img src="../images/2019avg.png" alt="" class="cccinfo">
+    <img src="../images/2020avg.png" alt="" class="cccinfo">
+    <p><i>CCC 2019 (first image) vs CCC 2020 (second image) stats</i></p>
+</span>
+<p>
+This year's S1 and S2 average scores were significantly lower from last year's. This is because the difficulty of these early problems has increased. S3 had a higher average score but a lower non-zero average score. I'm not sure what to make of this, but I know that the nature of this year's S3 is different. Last year's S3 tested the contestant's ability to come up with an ad hoc solution and then debug it. This is in sharp contrast to this year's S3 which simply tested for knowledge of string algorithms. As seen in the non-zero scores, this year's S4 and S5 were easier than those of last year. While last year's S4 and S5 tested involved programming concepts, solving this year's S4 relied solely on a few observations and this year's S5 did not make heavy use of programming concepts either.
+</p>
+<span>
+    <img src="../images/2019rank.png" alt="" class="cccinfo">
+    <img src="../images/2020rank.png" alt="" class="cccinfo">
+    <p><i>CCC 2019 (first image) vs CCC 2020 (second image) stats</i></p>
+</span>
+<p>
+Due to an easier S4 and S5, the 2020 CCO cut-off is 57 and 25 contestants have been invited. In comparison, last year's cut-off was 48 and 31 were invited.
+<br>
+<br>
+Although this year's Honour Roll cut-off is 37, which is lower than last year's 39, we need to consider that there are 201 contestants on the 2020 Honour Roll while there were only 150 last year.
+Congratulations to all the contestants who made the Honour Roll!
+</p>
+
+
+<h3>Problem Analysis</h3>
+
+
+<h4>S1: Surmising a Sprinter's Speed</h4>
+<p>Sort the points by time. Then loop through each consecutive pair to find the constant speed over each interval. The answer is the highest of the speeds.
+<br>
+<br>
+Solve time: 4 minutes
+</p>
+
+
+<h4>S2: Escape Room</h4>
+<p>Perform a depth-first search (DFS) on the cells. There are $N^2$ cells and individually finding the factors of each number has complexity $O(\sqrt{max\_number})$. This results is an upper bound of $N^2 \cdot \sqrt{max\_number} = (10^3)^2 \cdot \sqrt{10^6} = 10^6 \cdot 10^3 \approx 10^9$ operations. Although it appears that this solution cuts close to the time limit, it passes with ease.
+<br>
+<br>
+For a faster solution, observe that when the cell at $(i, j)$ has value $v$, a cell of product $i \cdot j$ can reach a cell of product $v$. Let us add an edge from node $i \cdot j$ to node $v$. The answer is "yes" iff there exists a path from node $1$ to node $n \cdot m$.
+<br>
+<br>
+Time complexity: $O(NM)$ or $O(NM log 10^6)$.
+<br>
+Solve time: 8 minutes
+</p>
+
+
+<h4>S3: Searching for Strings</h4>
+<p>Let $S$ be a substring of $H$ with length $|N|$. To check whether $S$ is a permutation of $H$, keep a count of each of the 26 letters of the alphabet. If the counts of $S$ and $N$ all match, then they are permutations of each other. To do this quickly, loop through the $S$s from left to right. This way, only one character is gained and lost in each new substring. Time complexity: $O(|H|)$.
+<br>
+<br>
+What we want is the number of distinct substrings $S$ that are permutations of $N$. Let $T$ be the set of all such $S$. To eliminate duplicates, we need a quick way of comparing the elements of $T$. This can be done quickly by using a <a href="https://cp-algorithms.com/string/string-hashing.html">rolling hash</a> (I used a double-hash with $131$ as my base and $1494318097$ and $1685518853$ as my mods). Now instead of inserting valid $S$s into $T$, we insert $hash(S)$s. The answer is the cardinality of $T$. 
+<br>
+<br>
+Final time complexity: $O(|H|)$ or $O(|H| log |H|)$.
+<br>
+Solve time: 14 minutes
+</p>
+
+
+<h4>S4: Swapping Seats</h4>
+<p>First, let us solve the problem where the table is linear rather than circular—the $1^{st}$ person and $N^{th}$ person are not adjacent. When we are done, segments of $A$, $B$, and $C$ type people will be contiguous. The order of the segments will either be $ABC$, $ACB$, $BAC$, $BCA$, $CAB$, or $CBA$. We can try all 6 permutations. In each permutation, the table is split into 3 segments that will eventually be occupied $A/B/C$ people. Let's call these “final groups”. If a person of group $X$ is already in the final group of $X$, there is no point in moving him/her. If an $X$ and a $Y$ person can end up in their correct final groups by swapping, then swap them. Otherwise, we will have a non-negative number of tuples of three people—one from each group—who can all end up where they need to be in 2 swaps. This algorithm is guaranteed to give the minimum number of swaps needed. Notice that all we care about is which group each person is from and which $A/B/C$ final segment he/she is currently in. If we go back to the circular case and everyone shifts left by one, only three people will get different final groups. Thus, we can shift the table $N$ times in $O(1) \cdot N = O(N)$ and check the swap count each time. The answer is the minimum of these.
+<br>
+<br>
+Time complexity: $O(N)$.
+<br>
+Solve time: 49 minutes
+</p>
+
+
+<h4>S5: Josh's Double Bacon Deluxe</h4>
+<p>Let $P_i$ be the probability that John does not get his burger if the $i^{th}$ person does not get his/her burger. The base case is $P_N = 0$. For all $i$, $ i\neq 1$, if $b_i = b_1$, $i$ will take the coach's burger and everyone after $i$ gets the correct burger. Otherwise, if there exists a person $j$ after $i$ who ordered the same burger as person $i$, person $i$ will take person $j$'s burger. In this case, $P_i = P_j$. Otherwise, $i$ will take a remaining burger at random. If $i$ takes the coach's burger, then everyone behind $i$ will get his/her own burger. Otherwise, if $i$ takes $j$'s burger, then the probability in this case is $P_j$. Here, $P_i = \frac{1 + \sum_{j = i+1}^{n} {P_j}}{n-i+1}$. We can also use this recurrence to calculate $P_1$, which is our final answer.
+<br>
+<br>
+\[
+    P_i= 
+\begin{cases}
+    0 & {\text{if }       i = N}\\
+    1 & {\text{if }       i \neq 1, b_i = b_1}\\
+    P_j & {\text{if }     i \neq 1, \exists\; j\, |\, j > i, b_j = a_i}\\
+    \frac{1 + \sum_{j = i+1}^{n} {P_j}}{n-i+1} & \text{otherwise}\\
+\end{cases}
+\]
+<br>
+<br>
+Finding whether there exists a $j$ each time can be done in $O(1)$ with a hash table. Finding the suffix sums of $P$ can be done in $O(1)$ each time if we find $P_i$s in decreasing order of $i$.
+<br>
+<br>
+Time complexity: $O(N)$ or $O(N log N)$.
+<br>
+Solve time: 55 minutes
+</p>
+
+
+<h3>Summary</h3>
+<p>I enjoyed solving this year's CCC problems and I hope that you will enjoy them as well. My in-contest solutions in C++ are available <a href="https://github.com/crackersamdjam/Programming-Contest-Solutions">here</a>.
+<br>
+<br>
+Final score: 75/75 (1st place)
+<br>
+Total solve time: 130 minutes
+</p>
+                          
+                                    </article>
+                                </div>
+                            </div>
+
+                            <div class="col-4  col-12-narrower imp-narrower">
+                                <div id="sidebar">
+                                    <!-- Sidebar -->
+                                    <section>
+                                        <h3>Blog Articles</h3>
+                                        <p>I occasionally write about programming contests and related topics. Enjoy my articles!</p>
+                                        <ul class="links">
+                                            <li><a href="ccc2020.html">CCC 2020</a></li>
+                                            <li><a href="sublime-text-3.html">Sublime Text 3</a></li>
+                                        </ul>
+                                        <footer>
+                                        </footer>
+                                    </section>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+            <!-- copy down from here for every page -->
+            <!-- Footer -->
+            <div id="footer">
+
+                <!-- Icons -->
+                    <ul class="icons">
+                        <li><a href="https://github.com/crackersamdjam" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+                        <li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+                        <li><a href="mailto:crackersamdjam.teaching@gmail.com"><i class="fas fa-envelope"></i></a></li>
+                    </ul>
+
+            </div>
+
+        </div>
+
+        <!-- Scripts -->
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/jquery.dropotron.min.js"></script>
+        <script src="../assets/js/browser.min.js"></script>
+        <script src="../assets/js/breakpoints.min.js"></script>
+        <script src="../assets/js/util.js"></script>
+        <script src="../assets/js/main.js"></script>
+
+    </body>
+</html>
