@@ -92,7 +92,7 @@ Congratulations to all the contestants who made the 2020 Honour Roll!
 
 
 <h4>S1: Surmising a Sprinter's Speed</h4>
-<p>Sort the points by time. Then, loop through each consecutive pair to find the constant speed over that interval. The answer is the highest of the speeds.
+<p>Sort the points by time. Then, loop through each consecutive pair to find the constant speed over each interval. The answer is the highest of the speeds.
 <br>
 <br>
 Solve time: 4 minutes
@@ -100,8 +100,13 @@ Solve time: 4 minutes
 
 
 <h4>S2: Escape Room</h4>
-<p>Perform a depth first search (DFS) on the cells. There are $N^2$ cells and individually finding the factors of each number has complexity $O(\sqrt{max\_number})$. This results is an upper bound of $N^2 * \sqrt{max\_number} = (10^3)^2 * \sqrt{10^6} = 10^6 * 10^3 \approx 10^9$ operations. Although it appears that this solution cuts close to the time limit, it passes with ease.
+<p>Perform a depth first search (DFS) on the cells. There are $N^2$ cells and individually finding the factors of each number has complexity $O(\sqrt{max\_number})$. This results is an upper bound of $N^2 \cdot \sqrt{max\_number} = (10^3)^2 \cdot \sqrt{10^6} = 10^6 \cdot 10^3 \approx 10^9$ operations. Although it appears that this solution cuts close to the time limit, it passes with ease.
 <br>
+<br>
+For a faster solution, observe that when $cell_{i, j} = v$, a cell of product $i \cdot j$ can reach a cell of product $v$. Let us add an edge from $i \cdot j$ to $v$. The answer is "yes" iff there exists a path from $1$ to $n \cdot m$.
+<br>
+<br>
+Time complexity: $O(NM)$ or $O(NM log 10^6)$.
 <br>
 Solve time: 8 minutes
 </p>
@@ -121,7 +126,7 @@ Solve time: 14 minutes
 
 
 <h4>S4: Swapping Seats</h4>
-<p>First, let us solve the problem where the table is linear rather than circular—the $1^{st}$ person and $N^{th}$ person are not adjacent. When we are done, segments of $A$, $B$, and $C$ type people will be contiguous. The order of the segments will either be $ABC$, $ACB$, $BAC$, $BCA$, $CAB$, or $CBA$. We can try all 6. For each possible order of letters, the table is now split into 3 segments that will eventually be occupied $A/B/C$ people. Let's call these “final groups”. If a person of group $X$ is already in the final group of $X$, there is no point in moving him/her. If an $X$ and a $Y$ person can end up in their correct groups by swapping, then swap them. Otherwise, we will have tuples of three people—one from each group—who can all end up where they need to be in 2 swaps. This is guaranteed to give the minimum number of swaps needed. Notice that all we care about is which group each person is from and which $A/B/C$ final segment he/she is currently in. If we go back to the circular case and everyone shifts left by one, only three people will get different final groups. We can shift the table N times in $O(1)*N = O(N)$ to get the minimum of all the answers.
+<p>First, let us solve the problem where the table is linear rather than circular—the $1^{st}$ person and $N^{th}$ person are not adjacent. When we are done, segments of $A$, $B$, and $C$ type people will be contiguous. The order of the segments will either be $ABC$, $ACB$, $BAC$, $BCA$, $CAB$, or $CBA$. We can try all 6. For each possible order of letters, the table is now split into 3 segments that will eventually be occupied $A/B/C$ people. Let's call these “final groups”. If a person of group $X$ is already in the final group of $X$, there is no point in moving him/her. If an $X$ and a $Y$ person can end up in their correct groups by swapping, then swap them. Otherwise, we will have tuples of three people—one from each group—who can all end up where they need to be in 2 swaps. This is guaranteed to give the minimum number of swaps needed. Notice that all we care about is which group each person is from and which $A/B/C$ final segment he/she is currently in. If we go back to the circular case and everyone shifts left by one, only three people will get different final groups. We can shift the table N times in $O(1) \cdot N = O(N)$ to get the minimum of all the answers.
 <br>
 <br>
 Time complexity: $O(N)$.
@@ -151,7 +156,6 @@ Final score: 75/75 (1st place)
 <br>
 Total solve time: 130 minutes
 </p>
-
                           
                                     </article>
                                 </div>
