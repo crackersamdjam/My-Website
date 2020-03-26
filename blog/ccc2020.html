@@ -139,7 +139,7 @@ Solve time: 49 minutes
 <p>Let $P_i$ be the probability that John does not get his burger if the $i^{th}$ person does not get his/her burger. The base case is $P_N = 0$. For all $i$, $ i\neq 1$, if $b_i = b_1$, $i$ will take the coach's burger and everyone after $i$ gets the correct burger. Otherwise, if there exists a person $j$ after $i$ who ordered the same burger as person $i$, person $i$ will take person $j$'s burger. In this case, $P_i = P_j$. Otherwise, $i$ will take a remaining burger at random. If $i$ takes the coach's burger, then everyone behind $i$ will get his/her own burger. Otherwise, if $i$ takes $j$'s burger, then the probability in this case is $P_j$. Here, $P_i = \frac{1 + \sum_{j = i+1}^{n} {P_j}}{n-i+1}$. We can also use this recurrence to calculate $P_1$, which is our final answer.
 <br>
 <br>
-\[
+$
     P_i= 
 \begin{cases}
     0 & {\text{if }       i = N}\\
@@ -147,7 +147,7 @@ Solve time: 49 minutes
     P_j & {\text{if }     i \neq 1, \exists\; j\, |\, j > i, b_j = a_i}\\
     \frac{1 + \sum_{j = i+1}^{n} {P_j}}{n-i+1} & \text{otherwise}\\
 \end{cases}
-\]
+$
 <br>
 <br>
 Finding whether there exists a $j$ each time can be done in $O(1)$ with a hash table. Finding the suffix sums of $P$ can be done in $O(1)$ each time if we find $P_i$s in decreasing order of $i$.
