@@ -6,6 +6,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="../assets/css/main.css" />
+        <link href="../assets/css/prism.css" rel="stylesheet" />
 
         <!-- MathJax so that I can use inline LaTeX -->
         <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -13,7 +14,7 @@
         MathJax = {
           tex: {
             inlineMath: [['$', '$'], ['\\(', '\\)']],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            displayMath: [['$$','$$'], ["\\[","\\]"]]
           }
         };
         </script>
@@ -23,6 +24,7 @@
     </head>
     
     <body class="is-preload">
+        <a name="top"></a>
 
         <div id="page-wrapper">
 
@@ -159,14 +161,260 @@ Solve time: 55 minutes
 
 
 <h3>Summary</h3>
-<p>I enjoyed solving this year's CCC problems and I hope that you will enjoy them as well. My in-contest solutions in C++ are available <a href="https://github.com/crackersamdjam/Programming-Contest-Solutions">here</a>.
+<p>I enjoyed solving this year's CCC problems and I hope that you will enjoy them as well. My in-contest solutions in C++ are available <a href="https://github.com/crackersamdjam/Programming-Contest-Solutions">here</a> or at the bottom of the page.
 <br>
 <br>
 Final score: 75/75 (1st place)
 <br>
 Total solve time: 130 minutes
 </p>
-                          
+
+<a href="#top">Back to top</a>
+<pre><code class="language-cpp">// S1 solution in O(N log N)
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+pair&lt;double, double&gt; a[100002];
+int n;
+double ans = 0;
+
+void init(){
+    #ifndef ONLINE_JUDGE
+        freopen("in.txt", "r", stdin);
+        freopen("out.txt", "w", stdout);
+        freopen("err.txt", "w", stderr);
+    #endif
+}
+
+int main(){
+    init();
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    cin&gt;&gt;n;
+    for(int i = 0; i &lt; n; i++)
+        cin&gt;&gt;a[i].first&gt;&gt;a[i].second;
+    sort(a, a+n);
+    for(int i = 1; i &lt; n; i++){
+        ans = max(ans, abs(a[i].second-a[i-1].second)/(a[i].first-a[i-1].first));
+    }
+    cout&lt;&lt;fixed&lt;&lt;setprecision(10)&lt;&lt;ans;
+    return 0;
+}
+</code></pre>
+<a href="#top">Back to top</a>
+<pre><code class="language-cpp">// S2 solution in O(NM)
+#include &lt;bits/stdc++.h&gt;
+constexpr int MM = 1000001;
+
+int n, m;
+bool vis[MM];
+std::vector&lt;int&gt; adj[MM];
+
+void go(int u){
+    if(u == n){
+        puts("yes");
+        exit(0);
+    }
+    vis[u] = 1;
+    for(const int &i: adj[u])
+        if(!vis[i])
+            go(i);
+}
+
+int main(){
+#ifndef ONLINE_JUDGE
+    freopen("in.txt", "r", stdin);
+    freopen("out.txt", "w", stdout);
+    freopen("err.txt", "w", stderr);
+#endif
+    std::ios_base::sync_with_stdio(0);
+    std::cin.tie(0);
+    std::cin&gt;&gt;n&gt;&gt;m;
+    for(int i = 1,v,k; i &lt;= n; i++){
+        k = i;
+        for(int j = 1; j &lt;= m; j++, k += i){
+            std::cin&gt;&gt;v;
+            adj[k].emplace_back(v);
+        }
+    }
+    n *= m;
+    go(1);
+    puts("no");
+    exit(0);
+}
+</code></pre>
+<a href="#top">Back to top</a>
+<pre><code class="language-cpp">// S3 solution in O(|H| log |H|)
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+using ll = long long;
+const int MM = 2e5+5;
+
+int n, m, cnta[30], cntb[30];
+char sa[MM], sb[MM];
+set&lt;pair&lt;ll, ll&gt;&gt; st;
+ll base = 131, mod = 1685518853;
+ll base2 = 131, mod2 = 1494318097;
+ll h[MM], p[MM], h2[MM], p2[MM];
+
+void go(int j){
+    for(int i = 0; i &lt; 30; i++)
+        if(cnta[i] != cntb[i])
+            return;
+    ll hs = ((h[j] - h[j-n]*p[n])%mod+mod)%mod;
+    ll hs2 = ((h2[j] - h2[j-n]*p2[n])%mod2+mod2)%mod2;
+    st.insert({hs, hs2});
+}
+
+int main(){
+    scanf("%s %s", sa+1, sb+1);
+    n = strlen(sa+1), m = strlen(sb+1);
+    p[0] = p2[0] = 1;
+    for(int i = 1; i &lt;= m; i++){
+        p[i] = p[i-1]*base%mod;
+        h[i] = (h[i-1]*base + sb[i])%mod;
+        p2[i] = p2[i-1]*base2%mod2;
+        h2[i] = (h2[i-1]*base2 + sb[i])%mod2;
+    }
+    for(int i = 1; i &lt;= n; i++){
+        cnta[sa[i]-'a']++;
+        cntb[sb[i]-'a']++;
+    }
+    go(n);
+    for(int i = n+1; i &lt;= m; i++){
+        cntb[sb[i]-'a']++;
+        cntb[sb[i-n]-'a']--;
+        go(i);
+    }
+    printf("%ld\n", st.size());
+    
+    return 0;
+}
+</code></pre>
+<a href="#top">Back to top</a>
+<pre><code class="language-cpp">// S4 solution in O(N)
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int MM = 1e6+2;
+
+int n, cnt[3][3], ans = 1e9, num[3], na, nb, nc;
+char s[MM], ins[MM];
+
+int gp(int i){
+    if(i &lt; na)
+        return 0;
+    if(i &lt; na+nb)
+        return 1;
+    return 2;
+}
+
+int at(int i){
+    i %= n;
+    if(i &lt; 0) i += n;
+    return i;
+}
+
+void go(){
+    int tot = n-cnt[0][0]-cnt[1][1]-cnt[2][2], res = 0;
+    for(int i = 0; i &lt; 3; i++){
+        for(int j = 0; j &lt; i; j++){
+            int sub = min(cnt[i][j], cnt[j][i]);
+            res += sub;
+            tot -= sub*2;
+        }
+    }
+    assert(tot % 3 == 0);
+    res += tot/3*2;
+    
+    ans = min(ans, res);
+}
+
+int aa[] = {0, 1, 2};
+
+void run(){
+    memset(num, 0, sizeof num);
+    memset(cnt, 0, sizeof cnt);
+    for(int i = 0; i &lt; n; i++){
+        s[i] = aa[ins[i]];
+        num[s[i]]++;
+    }
+    na = num[0], nb = num[1], nc = num[2];
+    for(int i = 0; i &lt; n; i++){
+        cnt[gp(i)][s[i]]++;
+    }
+    go();
+    for(int sh = 0; sh &lt;= n; sh++){
+        cnt[0][s[at(na-1-sh)]]--;
+        cnt[1][s[at(na-1-sh)]]++;
+        
+        cnt[1][s[at(na+nb-1-sh)]]--;
+        cnt[2][s[at(na+nb-1-sh)]]++;
+        
+        cnt[2][s[at(n-1-sh)]]--;
+        cnt[0][s[at(n-1-sh)]]++;
+        go();
+    }
+}
+
+int main(){
+    //freopen("in.txt", "r", stdin);
+    scanf("%s", s);
+    n = strlen(s);
+    for(int i = 0; i &lt; n; i++){
+        s[i] -= 'A';
+        ins[i] = s[i];
+    }
+    do{
+        run();
+    } while(next_permutation(aa, aa+3));
+    
+    printf("%d\n", ans);
+    
+    return 0;
+}
+</code></pre>
+<a href="#top">Back to top</a>
+<pre><code class="language-cpp">// S5 solution in O(N log N)
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int MM = 1e6+2;
+
+int n, a[MM];
+map&lt;int, int&gt; mp;
+double dp[MM], suf;
+
+int main(){
+    //freopen("in.txt", "r", stdin);
+    scanf("%d", &n);
+    for(int i = 1; i &lt;= n; i++)
+        scanf("%d", a+i);
+    
+    if(a[1] == a[n])
+        return printf("1\n"), 0;
+
+    mp[a[n]] = n;
+    
+    for(int i = n-1; i &gt; 1; i--){
+        if(a[i] == a[1]){
+            dp[i] = 1;
+            mp[a[i]] = i;
+        }
+        else if(mp[a[i]])
+            dp[i] = dp[mp[a[i]]];
+        else
+            dp[i] = (suf+1)/(n-i+1);
+        
+        mp[a[i]] = i;
+        suf += dp[i];
+    }
+    
+    printf("%.8lf\n", accumulate(dp+2, dp+n, 1.0)/n);
+    
+    return 0;
+}
+</code></pre>
+<a href="#top">Back to top</a>
                                     </article>
                                 </div>
                             </div>
@@ -214,6 +462,6 @@ Total solve time: 130 minutes
         <script src="../assets/js/breakpoints.min.js"></script>
         <script src="../assets/js/util.js"></script>
         <script src="../assets/js/main.js"></script>
-
+        <script src="../assets/js/prism.js"></script>
     </body>
 </html>
