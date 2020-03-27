@@ -66,6 +66,7 @@ input, select, textarea {
 	appearance: none;
 }
 
+
 /* Basic */
 
 	html {
@@ -170,10 +171,13 @@ input, select, textarea {
 		top: -0.5em;
 	}
 
+/* Horizontal line purple */
 	hr {
-		border-top: solid 1px #e0e0e0;
-		border: 0;
-		margin-bottom: 1.5em;
+        /*border-top: solid 1px #e0e0e0;*/
+        border-top: solid 1px #bc3dbf;
+		border: 1;
+        margin-top: 0.9em;
+		margin-bottom: 0.4em;
 	}
 
 	blockquote {
@@ -2498,6 +2502,12 @@ input, select, textarea {
 			font-size: 0.8em;
 		}
 
+/* no change in appearnce of an anchor */
+a.no{
+    text-decoration: none;
+}
+
+
 /* Box */
 
 	.box.highlight {
@@ -2508,6 +2518,25 @@ input, select, textarea {
 		position: relative;
 		margin: 0 0 2em 0;
 	}
+
+    .no-margin{
+        margin: 0 0 0 0;
+    }
+
+    /* in blog posts */
+    p.date{
+        text-align: right;
+        margin: -1.86em 0 2em 0;
+        color: #999;
+    }
+
+        /* Date for dates in blog list */
+        .box.post .date{
+            text-align: right;
+            margin: -1.7em 0 1.3em 0;
+            /* negative so that can be on same line as title*/
+            color: #999;
+        }
 
 		.box.post:after {
 			content: '';

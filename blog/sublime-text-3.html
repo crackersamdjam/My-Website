@@ -6,13 +6,15 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="../assets/css/main.css" />
+        <link href="../assets/css/prism.css" rel="stylesheet" />
 
         <!-- MathJax so that I can use inline LaTeX -->
         <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>
         MathJax = {
           tex: {
-            inlineMath: [['$', '$'], ['\\(', '\\)']]
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$','$$'], ["\\[","\\]"]]
           }
         };
         </script>
@@ -22,6 +24,7 @@
     </head>
     
     <body class="is-preload">
+        <a name="top"></a>
 
         <div id="page-wrapper">
 
@@ -61,11 +64,13 @@
                                 <div id="content">
                                     <article>
                                         <header>
-                                            <h2>Sublime Text 3</h2>
-                                            <p>Coming Soon</p>
+                                            <h4 class="no-margin"><a href="../blog.html">Back</a></h4>
+                                            <hr>
+                                            <h2 class="no-margin">Sublime Text 3</h2>
+                                            <p align=right class="date">Coming soon</p>
                                         </header>
-                                        <p>.
-                                        </p>
+
+                                        <!-- every blog post copy up until here -->
                                     </article>
                                 </div>
                             </div>
@@ -113,6 +118,6 @@
         <script src="../assets/js/breakpoints.min.js"></script>
         <script src="../assets/js/util.js"></script>
         <script src="../assets/js/main.js"></script>
-
+        <script src="../assets/js/prism.js"></script>
     </body>
 </html>
