@@ -124,12 +124,24 @@ input, select, textarea {
 	}
 
 	p, ul, ol, dl, table, blockquote {
-		margin: 0 0 2em 0;
+		margin: 0 0 1em 0;
 	}
 
-    p.nospace{
-        margin: 0 0 0.5em 0;
+	li.nospace {
+        margin: 0 0 0.1em 0;
+        font-size: 0.9em		
+	}
+    p.nospace {
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+        font-size: 0.9em
         /* spacing in between list elements*/
+    }
+    a.nospace {
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+        font-size: 0.9em
+        /* list element font size*/
     }
 
 	h1, h2, h3, h4, h5, h6 {
@@ -137,6 +149,10 @@ input, select, textarea {
 		font-weight: 600;
 		line-height: 1.75em;
 		margin-bottom: 1em;
+	}
+
+	h3.nomargin {
+		margin-bottom: 0;
 	}
 
 		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
