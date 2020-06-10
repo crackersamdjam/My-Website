@@ -127,21 +127,12 @@ input, select, textarea {
 		margin: 0 0 1em 0;
 	}
 
-	li.nospace {
-        margin: 0 0 0.1em 0;
-        font-size: 0.9em		
-	}
-    p.nospace {
-        margin: 0 0 0 0;
-        padding: 0 0 0 0;
-        font-size: 0.9em
+    #nospace li {
+    	line-height: 130%;
+        margin: 0 0 1em 0;
+        padding: 0 0 0em 0;
+        font-size: 0.8em
         /* spacing in between list elements*/
-    }
-    a.nospace {
-        margin: 0 0 0 0;
-        padding: 0 0 0 0;
-        font-size: 0.9em
-        /* list element font size*/
     }
 
 	h1, h2, h3, h4, h5, h6 {
@@ -150,9 +141,9 @@ input, select, textarea {
 		line-height: 1.75em;
 		margin-bottom: 1em;
 	}
-
+	
 	h3.nomargin {
-		margin-bottom: 0;
+        margin: 0 0 0 0;
 	}
 
 		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
