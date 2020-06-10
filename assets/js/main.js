@@ -34,7 +34,7 @@
 				'<div id="titleBar">' +
 					'<a href="#navPanel" class="toggle"></a>' +
 					'<span class="title">' + /*$('#logo').html()*/ '' + '</span>' +
-                    // this happens when top bar shrinks small
+					// this happens when top bar shrinks small
 				'</div>'
 			)
 				.appendTo($body);
