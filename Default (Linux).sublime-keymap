@@ -1,0 +1,80 @@
+[
+    { "keys": ["ctrl+shift+["], "command": "prev_view" },
+    { "keys": ["ctrl+shift+]"], "command": "next_view" },
+    { "keys": ["ctrl+tab"], "command": "next_view_in_stack" },
+    { "keys": ["ctrl+shift+tab"], "command": "prev_view_in_stack" },
+    { "keys": ["ctrl+shift+f"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
+    { "keys": ["ctrl+y"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Line.sublime-macro"} },
+    { "keys": ["ctrl+d"], "command": "duplicate_line" },
+    //{ "keys": ["f5"], "command": "revert"},
+
+    //compilation
+    { "keys": ["alt+b"], "command": "exec", "args": {"kill": true} },
+    { "keys": ["alt+r"], "command": "build", "args": {"build_system": "Packages/User/competitive.sublime-build", "variant": "Fast", "choice_build_system": true, "choice_variant": true}},
+    { "keys": ["f7"], "command": "build", "args": {"build_system": "Packages/User/competitive.sublime-build", "variant": "Fast", "choice_build_system": true, "choice_variant": true}},
+    { "keys": ["alt+shift+r"], "command": "build", "args": {"build_system": "Packages/User/competitive.sublime-build", "variant": "Fast-noTime", "choice_build_system": true, "choice_variant": true}},
+    { "keys": ["alt+d"], "command": "build", "args": {"build_system": "Packages/User/competitive.sublime-build", "variant": "Sanitize", "choice_build_system": true, "choice_variant": true}},
+    { "keys": ["alt+shift+d"], "command": "build", "args": {"build_system": "Packages/User/competitive.sublime-build", "variant": "Sanitize-noTime", "choice_build_system": true, "choice_variant": true}},
+    
+    { "keys": ["alt+c"], "command": "cancel_build" },
+
+
+    { "keys": ["f11"], "command": "toggle_full_screen" },
+    { "keys": ["shift+f11"], "command": "toggle_distraction_free" },
+    { "keys": ["f10"], "command": "toggle_menu"},
+
+    { "keys": ["ctrl+r"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
+
+    // set this up later
+    // { "keys": ["ctrl+/"], "command": "move", "args": {"by": "lines", "forward": true} },
+    // ctrl+/ to comment out line and go to next line https://forum.sublimetext.com/t/how-to-bind-multiple-commands-for-a-keybinding/20745
+
+    //my layouts
+    //https://forum.sublimetext.com/t/set-layout-reference/5713
+    {
+        "keys": ["alt+shift+3"],
+        "command": "set_layout",
+        "args":
+        {
+            "cols": [0.0, 0.35, 1.0],
+            "rows": [0.0, 0.333, 0.666, 1.0],
+            "cells": [
+                [0, 0, 1, 1],
+                [0, 1, 1, 2],
+                [0, 2, 1, 3],
+                [1, 0, 2, 3]
+            ]
+        }
+    },
+    {
+        "keys": ["alt+shift+5"],
+        "command": "set_layout",
+        "args":
+        {
+            "cols": [0.0, 0.7, 1.0],
+            "rows": [0.0, 0.333, 0.666, 1.0],
+            "cells": [
+                [0, 0, 1, 3],
+                [1, 0, 2, 1],
+                [1, 1, 2, 2],
+                [1, 2, 2, 3]
+            ]
+        }
+    },
+    {
+        "keys": ["alt+shift+4"],
+        "command": "set_layout",
+        "args":
+        {
+            "cols": [0.0, 0.17, 0.75, 1.0],
+            "rows": [0.0, 0.333, 0.666, 1.0],
+            "cells": [
+                [0, 0, 1, 3],
+                [1, 0, 2, 3],
+                [2, 0, 3, 1],
+                [2, 1, 3, 2],
+                [2, 2, 3, 3]
+            ]
+        }
+    }
+]
