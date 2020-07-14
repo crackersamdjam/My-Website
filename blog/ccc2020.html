@@ -102,20 +102,20 @@ Solve time: 4 minutes
 
 
 <h4>S2: Escape Room</h4>
-<p>Perform a depth-first search (DFS) on the cells. There are $N^2$ cells and individually finding the factors of each number has complexity $\mathcal{O}(\sqrt{max\_number})$. This results is a loose upper bound of $N^2 \cdot \sqrt{max\_number} = (10^3)^2 \cdot \sqrt{10^6} = 10^6 \cdot 10^3 \approx 10^9$ operations. Although it appears that this solution cuts close to the time limit, it can pass.
+<p>Perform a depth-first search (DFS) on the cells. There are $N \cdot M$ cells and individually finding the factors of each number has complexity $\mathcal{O}(\sqrt{max\_number})$. This results is a loose upper bound of $NM \cdot \sqrt{max\_number} = 10^3 \cdot 10^3 \cdot \sqrt{10^6} = 10^9$ operations. Although it appears that this solution cuts close to the time limit, it can pass.
 <br>
 <br>
 For a faster solution, observe that when the cell at $(i, j)$ has value $v$, a cell of product $i \cdot j$ can reach a cell of product $v$. Let us add an edge from node $i \cdot j$ to node $v$. The answer is "yes" iff there exists a path from node $1$ to node $n \cdot m$.
 <br>
 <br>
-Time complexity: $\mathcal{O}(NM)$ or $\mathcal{O}(NM log 10^6)$.
+Time complexity: $\mathcal{O}(NM)$ or $\mathcal{O}(NM \sqrt{max\_number})$.
 <br>
 Solve time: 8 minutes
 </p>
 
 
 <h4>S3: Searching for Strings</h4>
-<p>Let $S$ be a substring of $H$ with length $|N|$. To check whether $S$ is a permutation of $H$, keep a count of each of the 26 letters of the alphabet. If the counts of $S$ and $N$ all match, then they are permutations of each other. To do this quickly, loop through the $S$s from left to right. This way, at most two characters are added or removed each time we shift right. This lets us know which substrings can satisfy the "permutation" requirement.
+<p>Let $S$ be a substring of $H$ with length $|N|$. To check whether $S$ is a permutation of $N$, keep a count of each of the 26 letters of the alphabet. If the counts of $S$ and $N$ all match, then they are permutations of each other. To do this quickly, loop through the $S$s from left to right. This way, at most two characters are added or removed each time we shift right by one character. This lets us know which substrings can satisfy the "permutation" requirement.
 <br>
 <br>
 Now we will find the number of distinct subtrings $S$ that work. Let $T$ be the set of all such $S$. To eliminate duplicates, we need a quick way of comparing the elements of $T$. This can be done quickly by using a <a href="https://cp-algorithms.com/string/string-hashing.html">rolling hash</a> (I used a double-hash with $131$ as my base and $1494318097$ and $1685518853$ as my mods). We insert valid $hash(S)$s into set $T$. Finally, the answer is the cardinality of $T$. 
@@ -128,7 +128,7 @@ Solve time: 14 minutes
 
 
 <h4>S4: Swapping Seats</h4>
-<p>First, let us solve the problem where the $1^{st}$ person and $N^{th}$ person are not adjacent. After all our swaps, segments of $A$, $B$, and $C$ type people will be contiguous. The order that these segments appear in is a permutation of $ABC$ (e.g. $ABC$, $ACB$, $BAC$, ...). We can try all 6 permutations. In each permutation, the table is split into 3 segments that will eventually be occupied $A/B/C$ people. Let's call these “final groups”. If a person of group $X$ is already in the final group of $X$, there is no point in moving him/her. If an $X$ and a $Y$ person can end up in their correct final groups by swapping the two, swap them. Otherwise, we will have a non-negative number of tuples of three people—one from each group—who can all end up where they need to be in 2 swaps (This looks like shifting $(X, Y, Z)$ to $(Y, Z, X)$). This algorithm is guaranteed to give the minimum number of swaps needed. Notice that all we care about is which group each person is from and which $A/B/C$ final segment he/she is currently in. If we go back to the circular case and everyone shifts left by one, only three people will be in different final groups. Thus, we can shift the table $N$ times and check the required swap count each time. The answer is the minimum of these.
+<p>First, let us solve the problem where the $1^{st}$ person and $N^{th}$ person are not adjacent. After all our swaps, segments of $A$, $B$, and $C$ type people will be contiguous. The order that these segments appear in is a permutation of $ABC$ (e.g. $ABC$, $ACB$, $BAC$, ...). We can try all 6 permutations. In each permutation, the table is split into 3 segments that will eventually be occupied $A/B/C$ people. Let's call these “final groups”. If a person of group $X$ is already in the final group of $X$, there is no point in moving him/her. If an $X$ and a $Y$ person can end up in their correct final groups by swapping the two, swap them. Otherwise, we will have a non-negative number of triples of three people—one from each group—who can all end up where they need to be in $2$ swaps (this looks like shifting $(X, Y, Z)$ to $(Y, Z, X)$). This algorithm is guaranteed to give the minimum number of swaps needed. Notice that all we care about is which group each person is from and which $A/B/C$ final segment he/she is currently in. If we go back to the circular case and everyone shifts left by one seat, only three people will be in different final groups. Thus, we can shift the table $N$ times and check the required swap-count each time. The answer is the minimum of the swap-counts.
 <br>
 <br>
 Time complexity: $\mathcal{O}(N)$.
