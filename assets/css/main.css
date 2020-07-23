@@ -66,8 +66,17 @@ input, select, textarea {
 	appearance: none;
 }
 
+/* Hidden text */
+#hide {
+    color: white;
+    transition: 1s;
+}
 
-/* Basic */
+#hide:hover {
+    color: black;
+}
+
+/* General CSS*/
 
 	html {
 		box-sizing: border-box;
@@ -184,7 +193,6 @@ input, select, textarea {
 
 /* Horizontal line purple */
 	hr {
-		/*border-top: solid 1px #e0e0e0;*/
 		border-top: solid 1px #bc3dbf;
 		border: 1;
 		margin-top: 0.9em;
