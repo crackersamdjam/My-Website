@@ -68,12 +68,12 @@ input, select, textarea {
 
 /* Hidden text */
 #hide {
-    color: white;
-    transition: 1s;
+	color: white;
+	transition: 1s;
 }
 
 #hide:hover {
-    color: black;
+	color: black;
 }
 
 /* General CSS*/
@@ -2165,6 +2165,22 @@ input, select, textarea {
 
 		.icon.brands:before {
 			font-family: 'Font Awesome 5 Brands';
+		}
+
+		/* CCOJ icon */
+		svg.icon {
+			top: .025em;
+			width: 1em;
+			height: 1em;
+			fill: #999999;
+		    transition: fill .2s ease-in-out;
+			-webkit-transition: fill .2s ease-in-out;
+			-moz-transition: fill .2s ease-in-out;
+			-ms-transition: fill .2s ease-in-out;
+		}
+
+		svg.icon:hover {
+		    fill: #474747;
 		}
 
 		.icon.major {
