@@ -1,1 +1,3 @@
-.gitattributes
+README.md export-ignore
+*.txt text
+
