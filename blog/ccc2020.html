@@ -171,14 +171,11 @@ Total solve time: 130 minutes
 #include &lt;bits/stdc++.h&gt;
 using namespace std;
 
-pair&lt;double, double&gt; a[100002];
+pair&lt;double, double&gt; a[100005];
 int n;
 double ans = 0;
 
 int main(){
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	cout.tie(0);
 	cin&gt;&gt;n;
 	for(int i = 0; i &lt; n; i++)
 		cin&gt;&gt;a[i].first&gt;&gt;a[i].second;
@@ -186,45 +183,44 @@ int main(){
 	for(int i = 1; i &lt; n; i++){
 		ans = max(ans, abs(a[i].second-a[i-1].second)/(a[i].first-a[i-1].first));
 	}
-	cout&lt;&lt;fixed&lt;&lt;setprecision(10)&lt;&lt;ans;
-	return 0;
+	cout&lt;&lt;fixed&lt;&lt;setprecision(9)&lt;&lt;ans;
 }
 </code></pre>
 <a href="#top">Back to top</a>
 <pre><code class="language-cpp">// S2 solution in O(NM)
 #include &lt;bits/stdc++.h&gt;
-constexpr int MM = 1000001;
+using namespace std;
+constexpr int MM = 1e6+5;
 
 int n, m;
 bool vis[MM];
-std::vector&lt;int&gt; adj[MM];
+vector&lt;int&gt; adj[MM];
 
 void go(int u){
 	if(u == n){
-		puts("yes");
+		cout<<"yes\n";
 		exit(0);
 	}
 	vis[u] = 1;
-	for(const int &i: adj[u])
+	for(int i: adj[u])
 		if(!vis[i])
 			go(i);
 }
 
 int main(){
-	std::ios_base::sync_with_stdio(0);
-	std::cin.tie(0);
-	std::cin&gt;&gt;n&gt;&gt;m;
-	for(int i = 1,v,k; i &lt;= n; i++){
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cin&gt;&gt;n&gt;&gt;m;
+	for(int i = 1,k; i &lt;= n; i++){
 		k = i;
-		for(int j = 1; j &lt;= m; j++, k += i){
-			std::cin&gt;&gt;v;
+		for(int j = 1,v; j &lt;= m; j++, k += i){
+			cin&gt;&gt;v;
 			adj[k].emplace_back(v);
 		}
 	}
 	n *= m;
 	go(1);
-	puts("no");
-	exit(0);
+	cout<<"no\n";
 }
 </code></pre>
 <a href="#top">Back to top</a>
@@ -232,7 +228,7 @@ int main(){
 #include &lt;bits/stdc++.h&gt;
 using namespace std;
 using ll = long long;
-const int MM = 2e5+5;
+constexpr int MM = 2e5+5;
 
 int n, m, cnta[30], cntb[30];
 char sa[MM], sb[MM];
@@ -271,32 +267,17 @@ int main(){
 		go(i);
 	}
 	printf("%ld\n", st.size());
-	
-	return 0;
 }
 </code></pre>
 <a href="#top">Back to top</a>
 <pre><code class="language-cpp">// S4 solution in O(N)
 #include &lt;bits/stdc++.h&gt;
 using namespace std;
-const int MM = 1e6+2;
+constexpr int MM = 1e6+2;
 
 int n, cnt[3][3], ans = 1e9, num[3], na, nb, nc;
 char s[MM], ins[MM];
-
-int gp(int i){
-	if(i &lt; na)
-		return 0;
-	if(i &lt; na+nb)
-		return 1;
-	return 2;
-}
-
-int at(int i){
-	i %= n;
-	if(i &lt; 0) i += n;
-	return i;
-}
+int aa[] = {0, 1, 2};
 
 void go(){
 	int tot = n-cnt[0][0]-cnt[1][1]-cnt[2][2], res = 0;
@@ -309,11 +290,8 @@ void go(){
 	}
 	assert(tot % 3 == 0);
 	res += tot/3*2;
-	
 	ans = min(ans, res);
 }
-
-int aa[] = {0, 1, 2};
 
 void run(){
 	memset(num, 0, sizeof num);
@@ -323,10 +301,26 @@ void run(){
 		num[s[i]]++;
 	}
 	na = num[0], nb = num[1], nc = num[2];
-	for(int i = 0; i &lt; n; i++){
+
+	auto gp = [](int i){
+		if(i &lt; na)
+			return 0;
+		if(i &lt; na+nb)
+			return 1;
+		return 2;
+	};
+
+	for(int i = 0; i &lt; n; i++)
 		cnt[gp(i)][s[i]]++;
-	}
+
 	go();
+
+	auto at = [](int i){
+		i %= n;
+		if(i &lt; 0) i += n;
+		return i;
+	};
+
 	for(int sh = 0; sh &lt;= n; sh++){
 		cnt[0][s[at(na-1-sh)]]--;
 		cnt[1][s[at(na-1-sh)]]++;
@@ -341,27 +335,25 @@ void run(){
 }
 
 int main(){
-	//freopen("in.txt", "r", stdin);
 	scanf("%s", s);
 	n = strlen(s);
 	for(int i = 0; i &lt; n; i++){
 		s[i] -= 'A';
 		ins[i] = s[i];
 	}
+
 	do{
 		run();
 	} while(next_permutation(aa, aa+3));
 	
 	printf("%d\n", ans);
-	
-	return 0;
 }
 </code></pre>
 <a href="#top">Back to top</a>
 <pre><code class="language-cpp">// S5 solution in O(N log N)
 #include &lt;bits/stdc++.h&gt;
 using namespace std;
-const int MM = 1e6+2;
+constexpr int MM = 1e6+2;
 
 int n, a[MM];
 map&lt;int, int&gt; mp;
@@ -392,8 +384,6 @@ int main(){
 	}
 	
 	printf("%.8lf\n", accumulate(dp+2, dp+n, 1.0)/n);
-	
-	return 0;
 }
 </code></pre>
 <a href="#top">Back to top</a>
